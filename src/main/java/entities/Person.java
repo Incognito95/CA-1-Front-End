@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,7 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -22,11 +25,53 @@ public class Person implements Serializable {
     private String lastName;
     private String email;
 
-    public Person(String firstName, String lastName, String email) {
+//    public Person(String firstName, String lastName, String email) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//    }
+    
+    @OneToMany(mappedBy = "person", cascade = (CascadeType.PERSIST))
+    private List<Phone> phone;
+    
+    
+    @ManyToMany(mappedBy = "persons", cascade = (CascadeType.PERSIST))
+    private List<Hobby> hobbies;
+    
+    @ManyToOne
+    private Address address;
+    
+
+    public Person(String firstName, String lastName, String email, List<Hobby> hobbies) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.hobbies = new ArrayList();
+        this.address = null;
+        this.phone = new ArrayList();
     }
+    
+    
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+    
+    
+
+    public List<Phone> getPhone() {
+        return phone;
+    }
+
+    public void setPhone(List<Phone> phone) {
+        this.phone = phone;
+    }
+    
+    
 
     public Long getId() {
         return id;
@@ -60,14 +105,36 @@ public class Person implements Serializable {
         this.email = email;
     }
 
-    public Person() {
+    public List<Hobby> getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(List<Hobby> hobbies) {
+        this.hobbies = hobbies;
     }
     
     
 
     
     
+    public Person() {
+    }
+    
+    
 
+    public void addHobby(Hobby hobby) {
+        if (hobby != null) { // if hobby doesn't exist insert person into person table
+            this.hobbies.add(hobby); // add hobby to table
+            hobby.getPersons().add(this); // add hobby into person table
+        }
+    }
+    
+    public void addNumberToPerson(Phone phone) {
+        if (phone != null) { // if hobby doesn't exist insert person into person table
+            phone.setPerson(this); // add city to address table
+            this.phone.add(phone); // add address to table
+        }
+    }
     
     
 }

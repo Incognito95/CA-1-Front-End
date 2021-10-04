@@ -29,13 +29,28 @@ public class Hobby implements Serializable {
     private Long id;
     private String name;
     private String description;
-
+    
+    
+    @ManyToMany
+    private List<Person> persons;
+    
 
     public Hobby() {
     }
+    
 
-    public Hobby(String name) {
+    public Hobby(String name, String description) {
         this.name = name;
+        this.description = description;
+        this.persons = new ArrayList();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -54,18 +69,20 @@ public class Hobby implements Serializable {
         this.description = description;
     }
 
-    
-  
-    
-    
-    public Long getId() {
-        return id;
-    }
-    
-
-    public void setId(Long id) {
-        this.id = id;
+    public List<Person> getPersons() {
+        return persons;
     }
 
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
+    }
+
+    
+    public void addPerson(Person person) {
+        if (person != null) { // if person doesn't exist insert person into person table
+            this.persons.add(person); // add person to table
+            person.getHobbies().add(this); // add person into hobby table
+        }
+    }
     
 }
