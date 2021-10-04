@@ -60,6 +60,11 @@ public class Person implements Serializable {
         this.email = email;
     }
 
+    public Person() {
+    }
+    
+    
+
     
     
 
