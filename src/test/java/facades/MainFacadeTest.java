@@ -104,6 +104,21 @@ public class MainFacadeTest {
 
     @Test
     public void testSearchForNumberOfPeopleWithHobby() throws Exception {
-
+        
+    }
+    
+        @Test
+    void testAddHobbyToPerson() {
+        p1.addHobby(hobby1);
+        p1.addHobby(hobby2);
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(p1);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        assertEquals(2, p1.getHobbies().size());
     }
 }

@@ -1,7 +1,10 @@
 package facades;
 
+import entities.Hobby;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.ws.rs.WebApplicationException;
 import utils.EMF_Creator;
 
 
@@ -60,7 +63,20 @@ public class MainFacade {
 //        List<Person> rms = query.getResultList();
 //        return PersonDTO.getDtos(rms);
 //    }
-
+    
+      public long getPersonCountByHobby(Hobby hobby) {
+    if (hobby.getName() == null) {
+      throw new WebApplicationException("Hobby name is missing", 400);
+    }
+    EntityManager em = emf.createEntityManager();
+    Query query = em.createQuery("SELECT COUNT(p) FROM Person p JOIN p.hobbies h WHERE h.name = :name ");
+    query.setParameter("name", hobby.getName());
+    return (long) query.getSingleResult();
+      }
+    
+    
+    
+    
     public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();
         MainFacade fe = getFacadeExample(emf);
