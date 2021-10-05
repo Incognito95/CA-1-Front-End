@@ -41,6 +41,11 @@ public class City implements Serializable {
         this.addresses = new ArrayList();
     }
 
+    public City() {
+    }
+    
+    
+
     public List<Address> getAddresses() {
         return addresses;
     }

@@ -16,11 +16,19 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 //Uncomment the line below, to temporarily disable this test
-@Disabled
+//@Disabled
 public class FacadeTest {
 
     private static EntityManagerFactory emf;
     private static FacadeExample facade;
+    
+//    Person p1 = new Person("admin", "admin", "admin@admin.com");
+//    Person p2 = new Person("admin 2", "admin 2", "admin2@admin.com");
+//    Person p3 = new Person("admin 3", "admin 3", "admin3@admin.com");
+//            
+//    Phone phone1 = new Phone(1234, "Admin 1 telefonnummer");
+//    Phone phone2 = new Phone(12356, "Admin 2 telefonnummer");
+//    Phone phone3 = new Phone(12356, "Admin 3 telefonnummer");
     
     
     public FacadeTest() {
@@ -48,17 +56,16 @@ public class FacadeTest {
         try {
            em.getTransaction().begin(); // Return the resource-level EntityTransaction object and commit multiple transactions.
             
-            em.createNamedQuery("Phone.deleteAllRows").executeUpdate();
-            em.createNamedQuery("Person.deleteAllRows").executeUpdate();
-            em.createNamedQuery("Hobby.deleteAllRows").executeUpdate(); 
-            em.createNamedQuery("Address.deleteAllRows").executeUpdate();
-            em.createNamedQuery("CityInfo.deleteAllRows").executeUpdate();
+            em.createQuery("DELETE FROM Phone").executeUpdate();
+//            em.createNamedQuery("Person.deleteAllRows").executeUpdate();
+//            em.createNamedQuery("Hobby.deleteAllRows").executeUpdate(); 
+//            em.createNamedQuery("Address.deleteAllRows").executeUpdate();
+//            em.createNamedQuery("CityInfo.deleteAllRows").executeUpdate();
             
-            // create person after deleting data
             Person p1 = new Person("admin", "admin", "admin@admin.com");
             Person p2 = new Person("admin 2", "admin 2", "admin2@admin.com");
             Person p3 = new Person("admin 3", "admin 3", "admin3@admin.com");
-            
+
             Phone phone1 = new Phone(1234, "Admin 1 telefonnummer");
             Phone phone2 = new Phone(12356, "Admin 2 telefonnummer");
             Phone phone3 = new Phone(12356, "Admin 3 telefonnummer");
@@ -79,18 +86,27 @@ public class FacadeTest {
             em.persist(phone2);
             em.persist(phone3);
             
+            System.out.println(p1);
+            
             em.getTransaction().commit();
         } finally {
             em.close();
         }
     }
     
+    
+    
+    
     @Test
     public void testAddPerson() throws Exception {
+        System.out.println("addPerson");
+        String email = "admin@admin.com";
+        String firstname = "admin";
+        String lastname = "admin";
+        
+        EntityManagerFactory _emf = null;
         
     }
-    
-    
     
     
     

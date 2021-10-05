@@ -128,7 +128,12 @@ public class Person implements Serializable {
     public Person() {
     }
     
-    
+//    public void addPerson(Person person) {
+//        if (person != null) { // if hobby doesn't exist insert person into person table
+//            this.hobbies.add(person); // add hobby to table
+//            person.get().add(this); // add hobby into person table
+//        }
+//    }
 
     public void addHobby(Hobby hobby) {
         if (hobby != null) { // if hobby doesn't exist insert person into person table
@@ -143,6 +148,7 @@ public class Person implements Serializable {
             this.phone.add(phone); // add address to table
         }
     }
+    
     
     
 }

@@ -35,6 +35,11 @@ public class Address implements Serializable {
     @ManyToOne
     private City city;
 
+    public Address() {
+    }
+    
+    
+
     public Address(String street, String AdditionalInfo) {
         this.street = street;
         this.AdditionalInfo = AdditionalInfo;
@@ -92,6 +97,8 @@ public class Address implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    
 
     
 }
