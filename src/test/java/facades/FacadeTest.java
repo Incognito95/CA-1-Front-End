@@ -1,5 +1,6 @@
 package facades;
 
+import dtos.PersonDTO;
 import entities.Hobby;
 import utils.EMF_Creator;
 import entities.Person;
@@ -22,13 +23,19 @@ public class FacadeTest {
     private static EntityManagerFactory emf;
     private static FacadeExample facade;
     
-//    Person p1 = new Person("admin", "admin", "admin@admin.com");
-//    Person p2 = new Person("admin 2", "admin 2", "admin2@admin.com");
-//    Person p3 = new Person("admin 3", "admin 3", "admin3@admin.com");
-//            
-//    Phone phone1 = new Phone(1234, "Admin 1 telefonnummer");
-//    Phone phone2 = new Phone(12356, "Admin 2 telefonnummer");
-//    Phone phone3 = new Phone(12356, "Admin 3 telefonnummer");
+        Person p1 = new Person("admin", "admin", "admin@admin.com");
+        Person p2 = new Person("admin 2", "admin 2", "admin2@admin.com");
+        Person p3 = new Person("admin 3", "admin 3", "admin3@admin.com");
+
+        Phone phone1 = new Phone(1234, "Admin 1 telefonnummer");
+        Phone phone2 = new Phone(12356, "Admin 2 telefonnummer");
+        Phone phone3 = new Phone(12356, "Admin 3 telefonnummer");
+            
+        Hobby hobby1 = new Hobby("Painting", "description here");
+        Hobby hobby2 = new Hobby("Working Out", "description here");
+        Hobby hobby3 = new Hobby("Writing", "desciption here");
+    
+
     
     
     public FacadeTest() {
@@ -62,31 +69,6 @@ public class FacadeTest {
             em.createQuery("DELETE FROM Address").executeUpdate();
             em.createQuery("DELETE FROM Hobby").executeUpdate();
             
-            Person p1 = new Person("admin", "admin", "admin@admin.com");
-            Person p2 = new Person("admin 2", "admin 2", "admin2@admin.com");
-            Person p3 = new Person("admin 3", "admin 3", "admin3@admin.com");
-
-            Phone phone1 = new Phone(1234, "Admin 1 telefonnummer");
-            Phone phone2 = new Phone(12356, "Admin 2 telefonnummer");
-            Phone phone3 = new Phone(12356, "Admin 3 telefonnummer");
-            
-            Hobby hobby1 = new Hobby("Painting", "description here");
-            Hobby hobby2 = new Hobby("Working Out", "description here");
-            Hobby hobby3 = new Hobby("Writing", "desciption here");
-            
-            em.persist(hobby1);
-            em.persist(hobby2);
-            em.persist(hobby3);
-            
-            em.persist(p1);
-            em.persist(p2);
-            em.persist(p3);
-            
-            em.persist(phone1);
-            em.persist(phone2);
-            em.persist(phone3);
-            
-            System.out.println(p1);
             
             em.getTransaction().commit();
         } finally {
@@ -100,11 +82,15 @@ public class FacadeTest {
     @Test
     public void testAddPerson() throws Exception {
         System.out.println("addPerson");
-        String firstname = "Admin 100";
-        String lastname = "Admin 100";
-        String email = "admin100@admin.com";
-        EntityManager _emf = null;
-        
+        String firstname = "admin 50";
+        String lastname = "admin 50";
+        String email = "admin50@admin50.com";
+        EntityManagerFactory _emf = null;
+        FacadeExample instance = facade.getFacadeExample(_emf);
+        PersonDTO result = instance.CreatePerson();
+        PersonDTO expResult = new PersonDTO(1,firstname, lastname, email);
+        expResult.setId(result.getId());
+        assertEquals(expResult, result);
     }
     
     
@@ -130,3 +116,17 @@ public class FacadeTest {
     }
 
 }
+
+
+//            
+//            em.persist(hobby1);
+//            em.persist(hobby2);
+//            em.persist(hobby3);
+//            
+//            em.persist(p1);
+//            em.persist(p2);
+//            em.persist(p3);
+//            
+//            em.persist(phone1);
+//            em.persist(phone2);
+//            em.persist(phone3);
