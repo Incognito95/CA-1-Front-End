@@ -40,6 +40,14 @@ public class Person implements Serializable {
     
     @ManyToOne
     private Address address;
+
+    public Person(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+    
+    
     
 
     public Person(String firstName, String lastName, String email, List<Hobby> hobbies) {
@@ -50,7 +58,7 @@ public class Person implements Serializable {
         this.address = null;
         this.phone = new ArrayList();
     }
-    
+
     
 
     public Address getAddress() {
