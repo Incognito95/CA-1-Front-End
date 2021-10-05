@@ -57,10 +57,10 @@ public class FacadeTest {
            em.getTransaction().begin(); // Return the resource-level EntityTransaction object and commit multiple transactions.
             
             em.createQuery("DELETE FROM Phone").executeUpdate();
-//            em.createNamedQuery("Person.deleteAllRows").executeUpdate();
-//            em.createNamedQuery("Hobby.deleteAllRows").executeUpdate(); 
-//            em.createNamedQuery("Address.deleteAllRows").executeUpdate();
-//            em.createNamedQuery("CityInfo.deleteAllRows").executeUpdate();
+            em.createQuery("DELETE FROM Person").executeUpdate();
+            em.createQuery("DELETE FROM City").executeUpdate();
+            em.createQuery("DELETE FROM Address").executeUpdate();
+            em.createQuery("DELETE FROM Hobby").executeUpdate();
             
             Person p1 = new Person("admin", "admin", "admin@admin.com");
             Person p2 = new Person("admin 2", "admin 2", "admin2@admin.com");
@@ -100,11 +100,10 @@ public class FacadeTest {
     @Test
     public void testAddPerson() throws Exception {
         System.out.println("addPerson");
-        String email = "admin@admin.com";
-        String firstname = "admin";
-        String lastname = "admin";
-        
-        EntityManagerFactory _emf = null;
+        String firstname = "Admin 100";
+        String lastname = "Admin 100";
+        String email = "admin100@admin.com";
+        EntityManager _emf = null;
         
     }
     
@@ -120,7 +119,7 @@ public class FacadeTest {
     
     @Test
     public void testAFacadeMethod() throws Exception {
-        assertEquals(2, facade.CreatePerson());
+        assertEquals(1, facade.CreatePerson());
 //        assertEquals(2, facade.c());
     }
     
