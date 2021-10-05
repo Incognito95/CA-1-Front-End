@@ -1,5 +1,6 @@
 package facades;
 
+import entities.Hobby;
 import utils.EMF_Creator;
 import entities.Person;
 import entities.Phone;
@@ -62,6 +63,14 @@ public class FacadeTest {
             Phone phone2 = new Phone(12356, "Admin 2 telefonnummer");
             Phone phone3 = new Phone(12356, "Admin 3 telefonnummer");
             
+            Hobby hobby1 = new Hobby("Painting", "description here");
+            Hobby hobby2 = new Hobby("Working Out", "description here");
+            Hobby hobby3 = new Hobby("Writing", "desciption here");
+            
+            em.persist(hobby1);
+            em.persist(hobby2);
+            em.persist(hobby3);
+            
             em.persist(p1);
             em.persist(p2);
             em.persist(p3);
@@ -99,5 +108,10 @@ public class FacadeTest {
 //        assertEquals(2, facade.c());
     }
     
+    
+    @Test
+    public void testSearchForNumberOfPeopleWithHobby() throws Exception {
+        
+    }
 
 }
