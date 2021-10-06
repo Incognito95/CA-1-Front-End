@@ -37,8 +37,9 @@ public class MainFacade {
     }
 
 
-    public PersonDTO getHobbyByPerson() throws Exception {
         
+
+    public PersonDTO getAllPersonsByCiytOrZip() {
         EntityManager em = emf.createEntityManager();
         
         try {
