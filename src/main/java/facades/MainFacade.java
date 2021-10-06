@@ -1,7 +1,9 @@
 package facades;
 
+import dtos.PersonDTO;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import utils.EMF_Creator;
 
 
@@ -29,22 +31,22 @@ public class MainFacade {
         return emf.createEntityManager();
     }
 
-//    public PersonDTO CreatePerson() {
-//        EntityManager em = getEntityManager();
-//        try {
-//            em.getTransaction().begin();
-//            Query q = em.createQuery("INSERT INTO PERSON SET FIRSTNAME = 'admin', LASTNAME = 'admin', EMAIL = 'admin@admin.com'");
-//
-//            int createPerson = q.executeUpdate();
-//            System.out.println("-------------------------------------------------");
-//            System.out.println("You have inserted: " + createPerson);
-//
-//            em.getTransaction().commit();
-//        } finally {
-//            em.close();
-//        }
-//        return new PersonDTO();
-//    }
+    public PersonDTO CreatePerson() {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Query q = em.createQuery("INSERT INTO PERSON SET FIRSTNAME = 'admin', LASTNAME = 'admin', EMAIL = 'admin@admin.com'");
+
+            int createPerson = q.executeUpdate();
+            System.out.println("-------------------------------------------------");
+            System.out.println("You have inserted: " + createPerson);
+
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new PersonDTO();
+    }
 
 //    public PersonDTO getById(long id) { //throws RenameMeNotFoundException {
 //        EntityManager em = emf.createEntityManager();
@@ -67,4 +69,8 @@ public class MainFacade {
 //        fe.getAll().forEach(dto->System.out.println(dto));
 //       fe.CreatePerson();
     }
+
+
+
+  
 }
