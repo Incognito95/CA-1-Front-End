@@ -24,18 +24,12 @@ public class Person implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
-
-//    public Person(String firstName, String lastName, String email) {
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.email = email;
-//    }
     
-    @OneToMany(mappedBy = "person", cascade = (CascadeType.PERSIST))
+    @OneToMany(mappedBy = "person", cascade = CascadeType.PERSIST)
     private List<Phone> phone;
     
     
-    @ManyToMany(mappedBy = "persons", cascade = (CascadeType.PERSIST))
+    @ManyToMany(mappedBy = "persons", cascade = CascadeType.PERSIST)
     private List<Hobby> hobbies;
     
     @ManyToOne
@@ -46,11 +40,8 @@ public class Person implements Serializable {
         this.lastName = lastName;
         this.email = email;
     }
-    
-    
-    
 
-    public Person(String firstName, String lastName, String email, List<Hobby> hobbies) {
+    public Person(String firstName, String lastName, String email, List<Hobby> hobbies, Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -59,7 +50,7 @@ public class Person implements Serializable {
         this.phone = new ArrayList();
     }
 
-    
+
 
     public Address getAddress() {
         return address;
@@ -68,8 +59,8 @@ public class Person implements Serializable {
     public void setAddress(Address address) {
         this.address = address;
     }
-    
-    
+
+
 
     public List<Phone> getPhone() {
         return phone;
@@ -78,8 +69,8 @@ public class Person implements Serializable {
     public void setPhone(List<Phone> phone) {
         this.phone = phone;
     }
-    
-    
+
+
 
     public Long getId() {
         return id;
@@ -120,11 +111,7 @@ public class Person implements Serializable {
     public void setHobbies(List<Hobby> hobbies) {
         this.hobbies = hobbies;
     }
-    
-    
 
-    
-    
     public Person() {
     }
     
@@ -136,19 +123,16 @@ public class Person implements Serializable {
 //    }
 
     public void addHobby(Hobby hobby) {
-        if (hobby != null) { // if hobby doesn't exist insert person into person table
+        if (hobby != null) { // if hobby doesn't exist insert hobby into person table
             this.hobbies.add(hobby); // add hobby to table
             hobby.getPersons().add(this); // add hobby into person table
         }
     }
     
     public void addNumberToPerson(Phone phone) {
-        if (phone != null) { // if hobby doesn't exist insert person into person table
-            phone.setPerson(this); // add city to address table
-            this.phone.add(phone); // add address to table
+        if (phone != null) { // if phone number doesn't exist insert phone number into person table
+            phone.setPerson(this); // add phone number to address table
+            this.phone.add(phone); // add phone number to table
         }
     }
-    
-    
-    
 }
