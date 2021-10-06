@@ -1,5 +1,6 @@
 package facades;
 
+import dtos.PersonDTO;
 import entities.Hobby;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,7 +21,7 @@ public class MainFacade {
      * @param _emf
      * @return an instance of this facade class.
      */
-    public static MainFacade getFacadeExample(EntityManagerFactory _emf) {
+    public static MainFacade getMainFacade(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
             instance = new MainFacade();
@@ -32,22 +33,22 @@ public class MainFacade {
         return emf.createEntityManager();
     }
 
-//    public PersonDTO CreatePerson() {
-//        EntityManager em = getEntityManager();
-//        try {
-//            em.getTransaction().begin();
-//            Query q = em.createQuery("INSERT INTO PERSON SET FIRSTNAME = 'admin', LASTNAME = 'admin', EMAIL = 'admin@admin.com'");
-//
-//            int createPerson = q.executeUpdate();
-//            System.out.println("-------------------------------------------------");
-//            System.out.println("You have inserted: " + createPerson);
-//
-//            em.getTransaction().commit();
-//        } finally {
-//            em.close();
-//        }
-//        return new PersonDTO();
-//    }
+    public PersonDTO CreatePerson() {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Query q = em.createQuery("INSERT INTO PERSON SET FIRSTNAME = 'admin', LASTNAME = 'admin', EMAIL = 'admin@admin.com'");
+
+            int createPerson = q.executeUpdate();
+            System.out.println("-------------------------------------------------");
+            System.out.println("You have inserted: " + createPerson);
+
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new PersonDTO();
+    }
 
 //    public PersonDTO getById(long id) { //throws RenameMeNotFoundException {
 //        EntityManager em = emf.createEntityManager();
@@ -64,7 +65,7 @@ public class MainFacade {
 //        return PersonDTO.getDtos(rms);
 //    }
     
-      public long getPersonCountByHobby(Hobby hobby) {
+      public long getAmountOfPeopleWithHobby(Hobby hobby) {
     if (hobby.getName() == null) {
       throw new WebApplicationException("Hobby name is missing", 400);
     }
@@ -72,15 +73,16 @@ public class MainFacade {
     Query query = em.createQuery("SELECT COUNT(p) FROM Person p JOIN p.hobbies h WHERE h.name = :name ");
     query.setParameter("name", hobby.getName());
     return (long) query.getSingleResult();
-      }
+    }
     
     
     
     
     public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();
-        MainFacade fe = getFacadeExample(emf);
-//        fe.getAll().forEach(dto->System.out.println(dto));
-//       fe.CreatePerson();
+        MainFacade mf = getMainFacade(emf);
+        //mf.getAll().forEach(dto->System.out.println(dto));
+        mf.CreatePerson();
     }
+
 }

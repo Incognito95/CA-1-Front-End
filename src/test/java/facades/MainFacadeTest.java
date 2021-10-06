@@ -40,7 +40,7 @@ public class MainFacadeTest {
     @BeforeAll
     public static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactoryForTest();
-        // facade = FacadeExample.getFacadeExample(emf);
+        facade = MainFacade.getMainFacade(emf);
     }
 
     @AfterAll
@@ -73,19 +73,19 @@ public class MainFacadeTest {
     }
 
 
-//    @Test
-//    public void testAddPerson() throws Exception {
-//        System.out.println("addPerson");
-//        String firstname = "admin 50";
-//        String lastname = "admin 50";
-//        String email = "admin50@admin50.com";
-//        EntityManagerFactory _emf = null;
-//        MainFacade instance = facade.getFacadeExample(_emf);
-//       PersonDTO result = instance.CreatePerson();
-//        PersonDTO expResult = new PersonDTO(1, firstname, lastname, email);
-//        expResult.setId(result.getId());
-//        assertEquals(expResult, result);
-//    }
+    @Test
+    public void testAddPerson() throws Exception {
+        System.out.println("addPerson");
+        String firstname = "admin 50";
+        String lastname = "admin 50";
+        String email = "admin50@admin50.com";
+        EntityManagerFactory _emf = null;
+        MainFacade instance = facade.getMainFacade(_emf);
+       PersonDTO result = instance.CreatePerson();
+        PersonDTO expResult = new PersonDTO(1, firstname, lastname, email);
+        expResult.setId(result.getId());
+        assertEquals(expResult, result);
+    }
 
 
     // executed after each @Test method in the current test class.
@@ -105,7 +105,7 @@ public class MainFacadeTest {
     @Test
     public void testSearchForNumberOfPeopleWithHobby() throws Exception {
         
-    }
+}
     
         @Test
     void testAddHobbyToPerson() {
