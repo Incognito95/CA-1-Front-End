@@ -135,4 +135,18 @@ public class Person implements Serializable {
             this.phone.add(phone); // add phone number to table
         }
     }
+    
+    public void removePhone(Phone phone) {
+        if (phone != null){
+            this.phone.remove(phone);
+            phone.setPerson(this);
+        }
+    }
+    
+    public void removeHobby(Hobby hobby) {
+        if(hobby != null){
+            this.hobbies.remove(hobby);
+            hobby.getPersons().remove(this);
+        }
+    }
 }
