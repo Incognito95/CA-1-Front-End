@@ -18,13 +18,13 @@ public class RenameMeResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(); 
     private static final MainFacade FACADE =  MainFacade.getFacadeExample(EMF);
-    private static PersonDTO p1 = new PersonDTO(1L,"firstname", "lastname", "email");
+    private static final String p1 = new PersonDTO().getFirstName();
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     
             
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String person() {
+    public String getHobbyByPerson() throws Exception {
         return GSON.toJson(p1);
     }
     
