@@ -26,9 +26,6 @@ public class PersonDTO {
         this.email = email;
     }
     
-
-
-
     public PersonDTO() {
        
     }
