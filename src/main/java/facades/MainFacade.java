@@ -142,6 +142,16 @@ public class MainFacade {
 //        return PersonDTO.getDtos(rms);
 //    }
     
+      public long getAmountOfPeopleWithHobby(Hobby hobby) {
+    if (hobby.getName() == null) {
+      throw new WebApplicationException("Hobby name is missing", 400);
+    }
+    EntityManager em = emf.createEntityManager();
+    Query query = em.createQuery("SELECT COUNT(p) FROM Person p JOIN p.hobbies h WHERE h.name = :name ");
+    query.setParameter("name", hobby.getName());
+    return (long) query.getSingleResult();
+    }
+    
     
     
     
