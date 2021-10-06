@@ -9,7 +9,15 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.ws.rs.WebApplicationException;
+import javax.persistence.TypedQuery;
+
+import dtos.PersonDTO;
+import entities.Person;
 import utils.EMF_Creator;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 public class MainFacade {
@@ -78,6 +86,69 @@ public class MainFacade {
             em.close();
         }
         return new PersonDTO();
+    }
+
+
+    public PersonDTO getById(long id) { //throws RenameMeNotFoundException {
+        EntityManager em = emf.createEntityManager();
+        Person rm = em.find(Person.class, id);
+        if (rm == null)
+           // throw new RenameMeNotFoundException("The RenameMe entity with ID: "+id+" Was not found");
+        return new PersonDTO(rm);
+        return null;
+    }
+
+    public PersonDTO getAllPersonsByCiytOrZip()
+    {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Query q = em.createNativeQuery("");
+            List<Object[]> getAllPersonsByCiytOrZip = q.getResultList();
+            System.out.println("-------------------------------------");
+            for (Object[] a : getAllPersonsByCiytOrZip)
+                System.out.println(Arrays.toString(a));
+            {
+                em.getTransaction().commit();
+            }
+        }finally {
+            em.close();
+        }
+        return new PersonDTO();
+    }
+
+    public PersonDTO editPerson()
+    {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Query q = em.createNativeQuery("");
+            List<Object[]> editPerson = q.getResultList();
+            System.out.println("-------------------------------------");
+            for (Object[] a : editPerson)
+                System.out.println(Arrays.toString(a));
+            {
+                em.getTransaction().commit();
+            }
+        }finally {
+            em.close();
+        }
+        return new PersonDTO();
+    }
+
+//    public List<PersonDTO> getAll(){
+//        EntityManager em = emf.createEntityManager();
+//        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
+//        List<Person> rms = query.getResultList();
+//        return PersonDTO.getDtos(rms);
+//    }
+    
+      public long getAmountOfPeopleWithHobby(Hobby hobby) {
+    if (hobby.getName() == null) {
+      throw new WebApplicationException("Hobby name is missing", 400);
+    }
+    EntityManager em = emf.createEntityManager();
+    Query query = em.createQuery("SELECT COUNT(p) FROM Person p JOIN p.hobbies h WHERE h.name = :name ");
+    query.setParameter("name", hobby.getName());
+    return (long) query.getSingleResult();
     }
     
     
