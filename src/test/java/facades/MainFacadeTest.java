@@ -89,35 +89,35 @@ public class MainFacadeTest {
     }
 
 
-//    @Test
-//    public void testAddPhone(){
-//        p1.addNumberToPerson(phone1);// adding a phone number to a person
-//        EntityManager em = emf.createEntityManager();
-//        try {
-//            em.getTransaction().begin();
-//            em.merge(p1);
-//            em.getTransaction().commit();
-//        }finally {
-//            em.close();
-//        }
-//        assertEquals(1234,p1.getPhone().get(1).getNumber());
-//    }
-//
-//    @Test
-//    public void testAddHobby(){
-//        p1.addHobby(hobby1);// adding a hobby  to a person
-//        p1.addHobby(hobby2);
-//        EntityManager em = emf.createEntityManager();
-//        try {
-//            em.getTransaction().begin(); //
-//            em.merge(p1);
-//            em.getTransaction().commit();
-//        }finally {
-//            em.close();
-//        }
-//        assertEquals(3,p1.getHobbies().size());
-//    }
+    @Test
+    public void testAddPhone(){
+        p1.addNumberToPerson(phone1);// adding a phone number to a person
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(p1);
+            em.getTransaction().commit();
+        }finally {
+            em.close();
+        }
+        assertEquals(1234,p1.getPhone().get(1).getNumber());
+    }
 
+
+    @Test
+    void testAddHobbyToPerson() {
+        p1.addHobby(hobby1);
+        p1.addHobby(hobby2);
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(p1);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        assertEquals(2, p1.getHobbies().size());
+    }
 
     // executed after each @Test method in the current test class.
     @AfterEach
@@ -138,18 +138,5 @@ public class MainFacadeTest {
         
 }
     
-        @Test
-    void testAddHobbyToPerson() {
-        p1.addHobby(hobby1);
-        p1.addHobby(hobby2);
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.merge(p1);
-            em.getTransaction().commit();
-        } finally {
-            em.close();
-        }
-        assertEquals(2, p1.getHobbies().size());
-    }
+  
 }
