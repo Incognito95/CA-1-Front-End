@@ -13,6 +13,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.persistence.TypedQuery;
 
 import dtos.PersonDTO;
+import entities.Hobby;
 import entities.Person;
 import utils.EMF_Creator;
 
@@ -20,13 +21,13 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class MainFacade {
+    public class MainFacade {
     private static MainFacade instance;
     private static EntityManagerFactory emf;
 
     //Private Constructor to ensure Singleton
-//    public MainFacade() {
-//    }
+    public MainFacade() {
+    }
 
     /**
      * @param _emf
@@ -45,8 +46,9 @@ public class MainFacade {
     }
 
 
-    public PersonDTO getHobbyByPerson() throws Exception {
         
+
+    public PersonDTO getHobbyByPerson() {
         EntityManager em = emf.createEntityManager();
         
         try {
@@ -102,63 +104,78 @@ public class MainFacade {
     {
         EntityManager em = emf.createEntityManager();
         try {
-            Query q = em.createNativeQuery("");
-            List<Object[]> getAllPersonsByCiytOrZip = q.getResultList();
-            System.out.println("-------------------------------------");
-            for (Object[] a : getAllPersonsByCiytOrZip)
+            em.getTransaction().begin();
+            
+            Query q = em.createNativeQuery("SELECT FIRSTNAME, COUNTRYNAME, ZIPCODE FROM PERSON INNER JOIN CITY");
+            List<Object[]> listOfPeopleByCityOrZip = q.getResultList();
+            System.out.println("-------------------------------------------------");
+            System.out.println("List of people by city or zip:");
+            for (Object[] a : listOfPeopleByCityOrZip) {
                 System.out.println(Arrays.toString(a));
-            {
-                em.getTransaction().commit();
             }
-        }finally {
-            em.close();
-        }
+
+                em.getTransaction().commit();
+            } finally {
+                em.close();
+            }
         return new PersonDTO();
     }
+    
 
     public PersonDTO editPerson()
     {
         EntityManager em = emf.createEntityManager();
         try {
-            Query q = em.createNativeQuery("");
-            List<Object[]> editPerson = q.getResultList();
-            System.out.println("-------------------------------------");
-            for (Object[] a : editPerson)
-                System.out.println(Arrays.toString(a));
-            {
-                em.getTransaction().commit();
-            }
-        }finally {
+            em.getTransaction().begin();
+            Query q = em.createNativeQuery("UPDATE PERSON SET FIRSTNAME = 'admin', LASTNAME = 'admin', EMAIL = 'admin@admin.com' WHERE ID = 1");
+            
+            int updatedPerson = q.executeUpdate();
+            System.out.println("-------------------------------------------------");
+            System.out.println("You updated a person with ID number: " + updatedPerson);
+            
+
+            em.getTransaction().commit();
+        } finally {
             em.close();
         }
         return new PersonDTO();
     }
-
-//    public List<PersonDTO> getAll(){
-//        EntityManager em = emf.createEntityManager();
-//        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
-//        List<Person> rms = query.getResultList();
-//        return PersonDTO.getDtos(rms);
-//    }
+   
+  
     
-      public long getAmountOfPeopleWithHobby(Hobby hobby) {
-    if (hobby.getName() == null) {
-      throw new WebApplicationException("Hobby name is missing", 400);
-    }
-    EntityManager em = emf.createEntityManager();
-    Query query = em.createQuery("SELECT COUNT(p) FROM Person p JOIN p.hobbies h WHERE h.name = :name ");
-    query.setParameter("name", hobby.getName());
-    return (long) query.getSingleResult();
-    }
+        public PersonDTO getAmountOfPeopleWithHobby()
+        {
+            EntityManager em = emf.createEntityManager();
+            
+            try {
+                em.getTransaction().begin();
+
+                Query q = em.createNativeQuery("SELECT COUNT(FIRSTNAME) FROM PERSON INNER JOIN HOBBY WHERE NAME = NAME");
+                List<Object[]> AmountOfPeopleWithHobby = q.getResultList();
+                System.out.println("-------------------------------------------------");
+               System.out.println("The amount of people with a hobby is: " + AmountOfPeopleWithHobby);
+                for (Object[] a : AmountOfPeopleWithHobby) {
+                    System.out.println(Arrays.toString(a));
+                }
+
+                    em.getTransaction().commit();
+                } finally {
+                    em.close();
+                }
+            return new PersonDTO();
+        }
     
     
     
     
     public static void main(String[] args) throws Exception {
         emf = EMF_Creator.createEntityManagerFactory();
-        MainFacade fe = getFacadeExample(emf);
+        MainFacade fe = getMainFacade(emf);
         fe.CreatePerson();
         fe.getHobbyByPerson();
+        fe.editPerson();
+        fe.getAllPersonsByCiytOrZip();
+        fe.getAmountOfPeopleWithHobby();
     }
 
 
