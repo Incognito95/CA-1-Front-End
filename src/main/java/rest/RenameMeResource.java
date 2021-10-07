@@ -24,7 +24,7 @@ public class RenameMeResource {
             
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String person() {
+    public String getHobbyByPerson() throws Exception {
         return GSON.toJson(p1);
     }
     
