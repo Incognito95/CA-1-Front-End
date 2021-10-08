@@ -33,6 +33,13 @@ public class RenameMeResource {
         return "{\"msg\":\"Hello World\"}";
     }
     
+    @Path("{server}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String serverIsUp(@PathParam("server")String server){
+        return "(\"msg\":\"Your server is up and running\")";
+    }
+    
     @Path("count")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
