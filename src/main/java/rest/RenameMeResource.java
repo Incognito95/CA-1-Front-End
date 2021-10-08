@@ -17,44 +17,21 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import static junit.runner.Version.id;
 //Todo Remove or change relevant parts before ACTUAL use
-@Path("Persons")
 public class RenameMeResource {
     
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
-    private static final Gson GSON = new Gson();
     private static final MainFacade FACADE = MainFacade.getMainFacade(EMF);
-
-//    private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(); 
-//    private static final String p1 = new PersonDTO().getFirstName();
-//    private static final MainFacade FACADE =  MainFacade.getMainFacade(EMF);
-////    private static PersonDTO p1 = new PersonDTO(1L,"firstname", "lastname", "email");
-//    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    
+    
+    
+    @Path("count")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getRenameMeCount() {
         
-    
-  // getAllPersonsByCiytOrZip
-  @GET
-  @Produces({MediaType.APPLICATION_JSON})
-  public String getAllPersonsByCiytOrZip() {
-   PersonDTO p = FACADE.getAllPersonsByCiytOrZip();
-   return GSON.toJson(p);
-  }
-    
-    //How to use @pathParam in order to have multiple paths
-//    @Path("adress")
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public String getFirtName(@PathParam("firstName") String firstName) {
-//        return GSON.toJson(p1);
-//        }
-    
-    
-//    @Path("count")
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public String getRenameMeCount() {
-//        
-//        
-//        //System.out.println("--------------->"+count);
-//        return "{\"count\":"+"}";  //Done manually so no need for a DTO
-//    }
+        
+        //System.out.println("--------------->"+count);
+        return "{\"count\":"+"}";  //Done manually so no need for a DTO
+    }
 }
