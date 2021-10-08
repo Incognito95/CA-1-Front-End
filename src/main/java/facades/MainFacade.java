@@ -100,6 +100,7 @@ import java.util.List;
         return null;
     }
 
+    
     public PersonDTO getAllPersonsByCiytOrZip()
     {
         EntityManager em = emf.createEntityManager();
@@ -143,8 +144,7 @@ import java.util.List;
    
   
     
-        public PersonDTO getAmountOfPeopleWithHobby()
-        {
+    public PersonDTO getAmountOfPeopleWithHobby() {
             EntityManager em = emf.createEntityManager();
             
             try {
@@ -153,19 +153,18 @@ import java.util.List;
                 Query q = em.createNativeQuery("SELECT COUNT(FIRSTNAME) FROM PERSON INNER JOIN HOBBY WHERE NAME = NAME");
                 List<Object[]> AmountOfPeopleWithHobby = q.getResultList();
                 System.out.println("-------------------------------------------------");
-               System.out.println("The amount of people with a hobby is: " + AmountOfPeopleWithHobby);
+                System.out.println("The amount of people with a hobby is: " + AmountOfPeopleWithHobby);
+                System.out.println("-------------------------------------------------");
                 for (Object[] a : AmountOfPeopleWithHobby) {
                     System.out.println(Arrays.toString(a));
                 }
-
-                    em.getTransaction().commit();
-                } finally {
-                    em.close();
-                }
+                
+                em.getTransaction().commit(); 
+            } finally {                
+                em.close();
+            }
             return new PersonDTO();
-        }
-    
-    
+    }
     
     
     public static void main(String[] args) throws Exception {
@@ -177,7 +176,5 @@ import java.util.List;
         fe.getAllPersonsByCiytOrZip();
         fe.getAmountOfPeopleWithHobby();
     }
-
-
-  
+ 
 }
