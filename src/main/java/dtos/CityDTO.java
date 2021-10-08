@@ -2,17 +2,12 @@ package dtos;
 
 import entities.Address;
 import entities.City;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
 
-@Schema(name="CityInfo")
 public class CityDTO {
-  @Schema(required = false)
   private Long id;
-  @Schema(required = true)
   private String ZipCode;
-  @Schema(required = true)
   private String city;
   private String countryName;
   private List<Address> addresses;

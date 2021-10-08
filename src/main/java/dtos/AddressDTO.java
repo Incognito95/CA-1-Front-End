@@ -1,34 +1,15 @@
 package dtos;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import entities.Address;
-import io.swagger.v3.oas.annotations.media.Schema;
 
-/**
- *
- * @author chris
- */
-
-
-
-@Schema(name = "Address")
 public class AddressDTO {
 
-  @Schema(required = false, example = "3")
   private Long id;
-  @Schema(required = true)
   private String street;
-  @Schema(required = false)
   private String additionalInfo;
-  @Schema(required = true)
   private CityDTO city;
 
-  public AddressDTO() {
-  }
+  public AddressDTO(){}
 
   public AddressDTO(Address entity) {
     this.id = entity.getId() == null ? null : entity.getId();
