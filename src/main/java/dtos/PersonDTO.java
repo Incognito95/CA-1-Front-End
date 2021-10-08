@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dtos;
 
 import entities.Person;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author tha
- */
 public class PersonDTO {
     private long id;
     private String firstName;
@@ -27,9 +18,7 @@ public class PersonDTO {
         this.email = email;
     }
     
-    public PersonDTO() {
-       
-    }
+    public PersonDTO(){}
     
     public PersonDTO(Person rm) {
         if(rm.getId() != null)

@@ -1,27 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dtos;
 
 import entities.Phone;
-import io.swagger.v3.oas.annotations.media.Schema;
 
-/**
- *
- * @author Christoffer
- */
-@Schema(name = "Phone")
 public class PhoneDTO {
 
-    @Schema(required = true)
     private int number;
-    @Schema(required = false)
     private String description;
 
-    public PhoneDTO() {
-    }
+    public PhoneDTO() {}
 
     public PhoneDTO(Phone phone) {
         this.number = phone.getNumber();
