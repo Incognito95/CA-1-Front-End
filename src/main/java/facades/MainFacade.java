@@ -102,17 +102,20 @@ public class MainFacade {
         return new PersonDTO();
     }
 
-    // Daniel
-    public PersonDTO getById(long id) { //throws RenameMeNotFoundException {
+    // Daniel - done
+    public List<Person> getById(long id) {
         EntityManager em = emf.createEntityManager();
-        Person rm = em.find(Person.class, id);
-        if (rm == null)
-            // throw new RenameMeNotFoundException("The RenameMe entity with ID: "+id+" Was not found");
-            return new PersonDTO(rm);
-        return null;
+        try {
+            TypedQuery<Person> query = em.createQuery("select p from Person p WHERE p.firstName = :id", Person.class);
+            query.setParameter("id", id);
+            return query.getResultList();
+        } catch (NoResultException ex) {
+            return new ArrayList<>();
+        }
     }
 
-    // ermin - doing
+
+    // ermin - done
     public List<Person> getAllPersonsByCiytOrZip(int zipcode) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -143,26 +146,16 @@ public class MainFacade {
         return new PersonDTO();
     }
 
-    // Daniel
-    public PersonDTO getAmountOfPeopleWithHobby() {
-        EntityManager em = emf.createEntityManager();
-
+    // Daniel - done
+    public long getAmountOfPeopleWithHobby() {       
+        EntityManager em = getEntityManager();
         try {
-            em.getTransaction().begin();
-
-            Query q = em.createNativeQuery("SELECT COUNT(FIRSTNAME) FROM PERSON INNER JOIN HOBBY WHERE NAME = NAME");
-            List<Object[]> AmountOfPeopleWithHobby = q.getResultList();
-            System.out.println("-------------------------------------------------");
-            System.out.println("The amount of people with a hobby is: " + AmountOfPeopleWithHobby);
-            for (Object[] a : AmountOfPeopleWithHobby) {
-                System.out.println(Arrays.toString(a));
-            }
-
-            em.getTransaction().commit();
-        } finally {
-            em.close();
+            long hobbyCount = (long) em.createQuery("SELECT COUNT(firstname) FROM Person p JOIN hobby WHERE p.firstName = :firstname").getSingleResult();
+            System.out.println(hobbyCount);
+            return hobbyCount;
+        }finally {
+        em.close();
         }
-        return new PersonDTO();
     }
     
     // add person method - jens

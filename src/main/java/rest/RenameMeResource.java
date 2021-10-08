@@ -57,6 +57,24 @@ public class RenameMeResource {
         PersonDTO persons = FACADE.getAllPersons();
         return GSON.toJson(persons);
     }
+    
+    
+    @Path("id")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getById() {
+        List<Person> getById = FACADE.getById(1);
+        return GSON.toJson(getById);
+    }
+    
+    @Path("amount")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAmountOfPeopleWithHobby() {
+        long hobbyCount = FACADE.getAmountOfPeopleWithHobby();
+        return "{\"count\":" + hobbyCount +"}";
+    }
+    
 
     
     
