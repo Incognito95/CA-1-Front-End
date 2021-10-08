@@ -18,6 +18,7 @@ public class PersonDTO {
     private String firstName;
     private String lastName;
     private String email;
+    private List<PersonDTO> all = new ArrayList<PersonDTO>();
 
     public PersonDTO(long id, String firstName, String lastName, String email) {
         this.id = id;
@@ -75,6 +76,12 @@ public class PersonDTO {
         List<PersonDTO> rmdtos = new ArrayList();
         rms.forEach(rm->rmdtos.add(new PersonDTO(rm)));
         return rmdtos;
+    }
+
+    public PersonDTO(List<Person> personEntities){
+        personEntities.forEach((p) -> {
+            all.add(new PersonDTO(p));
+        });
     }
 
 }
