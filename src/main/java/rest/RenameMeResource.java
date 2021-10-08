@@ -32,6 +32,7 @@ public class RenameMeResource {
     public String demo() {
         return "{\"msg\":\"Hello World\"}";
     }
+<<<<<<< HEAD
     
     @Path("{server}")
     @GET
@@ -40,13 +41,30 @@ public class RenameMeResource {
         return "(\"msg\":\"Your server is up and running\")";
     }
     
+=======
+
+    //How to use @pathParam in order to have multiple paths
+//    @Path("adress")
+//    @GET
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public String getFirtName(@PathParam("firstName") String firstName) {
+//        return GSON.toJson(p1);
+//        }
+
+    @Path("all")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAll(){
+        PersonDTO persons = FACADE.getAllPersons();
+        return GSON.toJson(persons);
+    }
+
+>>>>>>> fdc3850255ef8f8a2da94ece1a6c6042a414e52d
     @Path("count")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getRenameMeCount() {
-        
-        
-        //System.out.println("--------------->"+count);
-        return "{\"count\":"+"}";  //Done manually so no need for a DTO
+        long count = FACADE.getPersonCount();
+        return "{\"count\":" + count +"}";
     }
 }
