@@ -16,7 +16,6 @@ import javax.persistence.TypedQuery;
 import dtos.PersonDTO;
 import entities.Hobby;
 import entities.Person;
-import java.util.ArrayList;
 import utils.EMF_Creator;
 
 import java.util.Arrays;
@@ -81,8 +80,6 @@ public class MainFacade {
     }
 
 
-    
-    
     public PersonDTO CreatePerson() {
 
         EntityManager em = emf.createEntityManager();
@@ -113,9 +110,7 @@ public class MainFacade {
         return null;
     }
 
-    
-    public PersonDTO getAllPersonsByCiytOrZip()
-    {
+    public List<Person> getAllPersonsByCiytOrZip(int zipcode) {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<Person> query = em.createQuery("select p from Person p join p.address a WHERE a.city.ZipCode=:zipcode", Person.class);
@@ -144,32 +139,30 @@ public class MainFacade {
         }
         return new PersonDTO();
     }
-   
-  
-    
-    public PersonDTO getAmountOfPeopleWithHobby() {
-            EntityManager em = emf.createEntityManager();
-            
-            try {
-                em.getTransaction().begin();
 
-                Query q = em.createNativeQuery("SELECT COUNT(FIRSTNAME) FROM PERSON INNER JOIN HOBBY WHERE NAME = NAME");
-                List<Object[]> AmountOfPeopleWithHobby = q.getResultList();
-                System.out.println("-------------------------------------------------");
-                System.out.println("The amount of people with a hobby is: " + AmountOfPeopleWithHobby);
-                System.out.println("-------------------------------------------------");
-                for (Object[] a : AmountOfPeopleWithHobby) {
-                    System.out.println(Arrays.toString(a));
-                }
-                
-                em.getTransaction().commit(); 
-            } finally {                
-                em.close();
+
+    public PersonDTO getAmountOfPeopleWithHobby() {
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            em.getTransaction().begin();
+
+            Query q = em.createNativeQuery("SELECT COUNT(FIRSTNAME) FROM PERSON INNER JOIN HOBBY WHERE NAME = NAME");
+            List<Object[]> AmountOfPeopleWithHobby = q.getResultList();
+            System.out.println("-------------------------------------------------");
+            System.out.println("The amount of people with a hobby is: " + AmountOfPeopleWithHobby);
+            for (Object[] a : AmountOfPeopleWithHobby) {
+                System.out.println(Arrays.toString(a));
             }
-            return new PersonDTO();
+
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new PersonDTO();
     }
-    
-    
+
+
     public static void main(String[] args) throws Exception {
         emf = EMF_Creator.createEntityManagerFactory();
         MainFacade fe = getMainFacade(emf);
@@ -180,5 +173,6 @@ public class MainFacade {
 //        fe.getAmountOfPeopleWithHobby();
 //          fe.getPersonCount();
     }
- 
+
+
 }
