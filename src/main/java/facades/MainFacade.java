@@ -150,7 +150,7 @@ public class MainFacade {
     public long getAmountOfPeopleWithHobby() {       
         EntityManager em = getEntityManager();
         try {
-            long hobbyCount = (long) em.createQuery("SELECT COUNT(firstname) FROM Person p JOIN hobby WHERE p.firstName = :firstname").getSingleResult();
+            long hobbyCount = (long) em.createQuery("SELECT COUNT(p.firstName) FROM Person p JOIN p.hobbies h WHERE h.persons.firstName = :firstname").getSingleResult();
             System.out.println(hobbyCount);
             return hobbyCount;
         }finally {
