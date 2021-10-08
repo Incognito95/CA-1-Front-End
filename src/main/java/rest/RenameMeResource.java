@@ -17,13 +17,21 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import static junit.runner.Version.id;
 //Todo Remove or change relevant parts before ACTUAL use
+
+@Path("Persons")
 public class RenameMeResource {
+    
     
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     private static final MainFacade FACADE = MainFacade.getMainFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     
     
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String demo() {
+        return "{\"msg\":\"Hello World\"}";
+    }
     
     @Path("count")
     @GET
