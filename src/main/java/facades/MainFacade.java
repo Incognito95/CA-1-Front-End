@@ -15,6 +15,7 @@ import javax.persistence.TypedQuery;
 import dtos.PersonDTO;
 import entities.Hobby;
 import entities.Person;
+import java.util.ArrayList;
 import utils.EMF_Creator;
 
 import java.util.Arrays;
@@ -68,6 +69,7 @@ import java.util.List;
             }
         return new PersonDTO();
     }
+
     
     
     public PersonDTO CreatePerson() {
