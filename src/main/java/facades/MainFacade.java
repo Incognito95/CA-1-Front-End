@@ -46,6 +46,7 @@ public class MainFacade {
         return emf.createEntityManager();
     }
 
+    // ermin - done
     public long getPersonCount(){
         EntityManager em = getEntityManager();
         try {
@@ -57,6 +58,7 @@ public class MainFacade {
         }
     }
 
+    // ermin - done
     public PersonDTO getAllPersons() {
         EntityManager em = getEntityManager();
         try{
@@ -66,7 +68,7 @@ public class MainFacade {
         }
     }
 
-
+    // Ermin - doing
     public List<Hobby> getHobbyByPerson(long id) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -79,7 +81,7 @@ public class MainFacade {
         }
     }
 
-
+    // christoffer
     public PersonDTO CreatePerson() {
 
         EntityManager em = emf.createEntityManager();
@@ -100,7 +102,7 @@ public class MainFacade {
         return new PersonDTO();
     }
 
-
+    // Daniel
     public PersonDTO getById(long id) { //throws RenameMeNotFoundException {
         EntityManager em = emf.createEntityManager();
         Person rm = em.find(Person.class, id);
@@ -110,6 +112,7 @@ public class MainFacade {
         return null;
     }
 
+    // ermin - doing
     public List<Person> getAllPersonsByCiytOrZip(int zipcode) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -121,7 +124,7 @@ public class MainFacade {
         }
     }
 
-
+    // christoffer
     public PersonDTO editPerson() {
         EntityManager em = emf.createEntityManager();
         try {
@@ -140,7 +143,7 @@ public class MainFacade {
         return new PersonDTO();
     }
 
-
+    // Daniel
     public PersonDTO getAmountOfPeopleWithHobby() {
         EntityManager em = emf.createEntityManager();
 
@@ -161,6 +164,10 @@ public class MainFacade {
         }
         return new PersonDTO();
     }
+    
+    // add person method - jens
+    // delete person method - jens
+    
 
 
     public static void main(String[] args) throws Exception {

@@ -40,20 +40,26 @@ public class RenameMeResource {
 //    public String getFirtName(@PathParam("firstName") String firstName) {
 //        return GSON.toJson(p1);
 //        }
-
+    
+    @Path("count")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getPersonCount() {
+        long count = FACADE.getPersonCount();
+        return "{\"count\":" + count +"}";
+    }
+    
+    
     @Path("all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getAll(){
+    public String getAllPersons() {
         PersonDTO persons = FACADE.getAllPersons();
         return GSON.toJson(persons);
     }
 
-    @Path("count")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String getRenameMeCount() {
-        long count = FACADE.getPersonCount();
-        return "{\"count\":" + count +"}";
-    }
+    
+    
+    
+    
 }
