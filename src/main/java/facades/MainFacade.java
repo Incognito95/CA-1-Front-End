@@ -113,7 +113,7 @@ public class MainFacade {
     }
 
     // ermin - doing
-    public List<Person> getAllPersonsByCiytOrZip(int zipcode) {
+    public List<Person> getAllPersonsByZip(int zipcode) {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<Person> query = em.createQuery("select p from Person p join p.address a WHERE a.city.ZipCode=:zipcode", Person.class);

@@ -58,8 +58,20 @@ public class RenameMeResource {
         return GSON.toJson(persons);
     }
 
-    
-    
-    
+    @Path("hobby")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getHobbyByPerson() {
+        PersonDTO persons = (PersonDTO) FACADE.getHobbyByPerson(1);
+        return GSON.toJson(persons);
+    }
+
+    @Path("zip")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAllPersonsByZip() {
+        PersonDTO persons = (PersonDTO) FACADE.getAllPersonsByZip(1);
+        return GSON.toJson(persons);
+    }
     
 }
