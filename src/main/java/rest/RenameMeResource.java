@@ -2,7 +2,6 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sun.org.apache.bcel.internal.classfile.Utility;
 import dtos.PersonDTO;
 import entities.Person;
 import utils.EMF_Creator;
