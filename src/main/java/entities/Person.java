@@ -20,11 +20,11 @@ public class Person implements Serializable {
     private String lastName;
     private String email;
     
-    @OneToMany(mappedBy = "person", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "person", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Phone> phone;
     
     
-    @ManyToMany(mappedBy = "persons", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "persons", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Hobby> hobbies;
     
     @ManyToOne
@@ -110,12 +110,6 @@ public class Person implements Serializable {
     public Person() {
     }
     
-//    public void addPerson(Person person) {
-//        if (person != null) { // if hobby doesn't exist insert person into person table
-//            this.hobbies.add(person); // add hobby to table
-//            person.get().add(this); // add hobby into person table
-//        }
-//    }
 
     public void addHobby(Hobby hobby) {
         if (hobby != null) { // if hobby doesn't exist insert hobby into person table
