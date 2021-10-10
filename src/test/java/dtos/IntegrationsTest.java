@@ -246,6 +246,8 @@ public class IntegrationsTest {
             em.close();
         }
     }
+    
+    // Jens Christian - DeletePersonByID test - JC LAVER DEN.
 
 
 }

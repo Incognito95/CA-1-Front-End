@@ -192,13 +192,13 @@ public class MainFacade {
 
     public static void main(String[] args) throws Exception {
         emf = EMF_Creator.createEntityManagerFactory();
-        MainFacade fe = getMainFacade(emf);
-//        fe.CreatePerson();
-//        fe.getHobbyByPerson(1);
-//        fe.editPerson();
-//        fe.getAllPersonsByCiytOrZip(1);
-//        fe.getAmountOfPeopleWithHobby();
-//          fe.getPersonCount();
+        MainFacade mf = getMainFacade(emf);
+        mf.CreatePerson();
+        mf.getHobbyByPerson(1);
+        mf.editPerson();
+        mf.getAllPersonsByZip(1);
+        mf.getAmountOfPeopleWithHobby();
+        mf.getPersonCount();
     }
 
 
