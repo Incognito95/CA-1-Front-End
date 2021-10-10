@@ -46,6 +46,7 @@ public class MainFacade {
         return emf.createEntityManager();
     }
 
+    // ermin - done
     public long getPersonCount(){
         EntityManager em = getEntityManager();
         try {
@@ -57,6 +58,7 @@ public class MainFacade {
         }
     }
 
+    // ermin - done
     public PersonDTO getAllPersons() {
         EntityManager em = getEntityManager();
         try{
@@ -66,7 +68,7 @@ public class MainFacade {
         }
     }
 
-
+    // Ermin - doing
     public List<Hobby> getHobbyByPerson(long id) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -79,7 +81,7 @@ public class MainFacade {
         }
     }
 
-
+    // christoffer
     public PersonDTO CreatePerson() {
 
         EntityManager em = emf.createEntityManager();
@@ -100,17 +102,21 @@ public class MainFacade {
         return new PersonDTO();
     }
 
-
-    public PersonDTO getById(long id) { //throws RenameMeNotFoundException {
+    // Daniel - done
+    public List<Person> getById(long id) {
         EntityManager em = emf.createEntityManager();
-        Person rm = em.find(Person.class, id);
-        if (rm == null)
-            // throw new RenameMeNotFoundException("The RenameMe entity with ID: "+id+" Was not found");
-            return new PersonDTO(rm);
-        return null;
+        try {
+            TypedQuery<Person> query = em.createQuery("select p from Person p WHERE p.firstName = :id", Person.class);
+            query.setParameter("id", id);
+            return query.getResultList();
+        } catch (NoResultException ex) {
+            return new ArrayList<>();
+        }
     }
 
-    public List<Person> getAllPersonsByCiytOrZip(int zipcode) {
+
+    // ermin - done
+    public List<Person> getAllPersonsByZip(int zipcode) {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<Person> query = em.createQuery("select p from Person p join p.address a WHERE a.city.ZipCode=:zipcode", Person.class);
@@ -121,7 +127,7 @@ public class MainFacade {
         }
     }
 
-
+    // christoffer
     public PersonDTO editPerson() {
         EntityManager em = emf.createEntityManager();
         try {
@@ -140,27 +146,34 @@ public class MainFacade {
         return new PersonDTO();
     }
 
-
-    public PersonDTO getAmountOfPeopleWithHobby() {
+    // Daniel - done
+    public long getAmountOfPeopleWithHobby() {       
+        EntityManager em = getEntityManager();
+        try {
+            long hobbyCount = (long) em.createQuery("SELECT COUNT(p.firstName) FROM Person p JOIN p.hobbies h WHERE h.persons.firstName = :firstname").getSingleResult();
+            System.out.println(hobbyCount);
+            return hobbyCount;
+        }finally {
+        em.close();
+        }
+    }
+    
+    // delete person method - jens - done
+    public boolean deleteAPersonById(long id) {
         EntityManager em = emf.createEntityManager();
-
         try {
             em.getTransaction().begin();
-
-            Query q = em.createNativeQuery("SELECT COUNT(FIRSTNAME) FROM PERSON INNER JOIN HOBBY WHERE NAME = NAME");
-            List<Object[]> AmountOfPeopleWithHobby = q.getResultList();
-            System.out.println("-------------------------------------------------");
-            System.out.println("The amount of people with a hobby is: " + AmountOfPeopleWithHobby);
-            for (Object[] a : AmountOfPeopleWithHobby) {
-                System.out.println(Arrays.toString(a));
-            }
-
+            em.createQuery("DELETE FROM Person p WHERE p.person.id = :id").setParameter("id", id).executeUpdate();
+            System.out.println("You deleted a person with the ID: " + id);
             em.getTransaction().commit();
+            return true;
         } finally {
             em.close();
         }
-        return new PersonDTO();
     }
+
+    
+    
 
 
     public static void main(String[] args) throws Exception {

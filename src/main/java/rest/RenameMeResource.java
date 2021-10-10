@@ -2,7 +2,6 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sun.org.apache.bcel.internal.classfile.Utility;
 import dtos.PersonDTO;
 import entities.Person;
 import utils.EMF_Creator;
@@ -50,21 +49,61 @@ public class RenameMeResource {
 //    public String getFirtName(@PathParam("firstName") String firstName) {
 //        return GSON.toJson(p1);
 //        }
-
-    @Path("all")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String getAll(){
-        PersonDTO persons = FACADE.getAllPersons();
-        return GSON.toJson(persons);
-    }
-
->>>>>>> fdc3850255ef8f8a2da94ece1a6c6042a414e52d
+    
     @Path("count")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getRenameMeCount() {
+    public String getPersonCount() {
         long count = FACADE.getPersonCount();
         return "{\"count\":" + count +"}";
     }
+    
+    
+    @Path("all")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAllPersons() {
+        PersonDTO persons = FACADE.getAllPersons();
+        return GSON.toJson(persons);
+    }
+    
+    
+    @Path("id")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getById() {
+        List<Person> getById = FACADE.getById(1);
+        return GSON.toJson(getById);
+    }
+    
+    @Path("amount")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAmountOfPeopleWithHobby() {
+        long hobbyCount = FACADE.getAmountOfPeopleWithHobby();
+        return "{\"count\":" + hobbyCount +"}";
+    }
+    
+
+    @Path("hobby")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getHobbyByPerson() {
+        PersonDTO persons = (PersonDTO) FACADE.getHobbyByPerson(1);
+        return GSON.toJson(persons);
+    }
+
+<<<<<<< HEAD
+>>>>>>> fdc3850255ef8f8a2da94ece1a6c6042a414e52d
+    @Path("count")
+=======
+    @Path("zip")
+>>>>>>> 1ed6407d2888bc31347aa473647ca0ed8b4d489c
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAllPersonsByZip() {
+        PersonDTO persons = (PersonDTO) FACADE.getAllPersonsByZip(1);
+        return GSON.toJson(persons);
+    }
+    
 }

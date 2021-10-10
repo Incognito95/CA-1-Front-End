@@ -1,6 +1,5 @@
 package entities;
 
-import dtos.PersonDTO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -145,4 +144,5 @@ public class Person implements Serializable {
             hobby.getPersons().remove(this);
         }
     }
+    
 }

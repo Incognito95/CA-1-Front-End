@@ -1,6 +1,7 @@
 package dtos;
 
 import entities.Person;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +61,14 @@ public class PersonDTO {
         this.email = email;
     }
 
-    
+    public List<PersonDTO> getAll() {
+        return all;
+    }
+
+    public void setAll(List<PersonDTO> all) {
+        this.all = all;
+    }
+
     public static List<PersonDTO> getDtos(List<Person> rms){
         List<PersonDTO> rmdtos = new ArrayList();
         rms.forEach(rm->rmdtos.add(new PersonDTO(rm)));
@@ -72,5 +80,7 @@ public class PersonDTO {
             all.add(new PersonDTO(p));
         });
     }
+
+
 
 }
