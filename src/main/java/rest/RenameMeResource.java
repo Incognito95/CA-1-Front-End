@@ -31,7 +31,6 @@ public class RenameMeResource {
     public String demo() {
         return "{\"msg\":\"Hello World\"}";
     }
-<<<<<<< HEAD
     
     @Path("{server}")
     @GET
@@ -39,16 +38,6 @@ public class RenameMeResource {
     public String serverIsUp(@PathParam("server")String server){
         return "(\"msg\":\"Your server is up and running\")";
     }
-    
-=======
-
-    //How to use @pathParam in order to have multiple paths
-//    @Path("adress")
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public String getFirtName(@PathParam("firstName") String firstName) {
-//        return GSON.toJson(p1);
-//        }
     
     @Path("count")
     @GET
@@ -93,12 +82,7 @@ public class RenameMeResource {
         return GSON.toJson(persons);
     }
 
-<<<<<<< HEAD
->>>>>>> fdc3850255ef8f8a2da94ece1a6c6042a414e52d
-    @Path("count")
-=======
     @Path("zip")
->>>>>>> 1ed6407d2888bc31347aa473647ca0ed8b4d489c
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllPersonsByZip() {

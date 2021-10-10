@@ -14,8 +14,11 @@ import javax.ws.rs.WebApplicationException;
 import javax.persistence.TypedQuery;
 
 import dtos.PersonDTO;
+import entities.Address;
 import entities.Hobby;
 import entities.Person;
+import errorhandling.MissingInputException;
+import errorhandling.PersonNotFoundException;
 import utils.EMF_Creator;
 
 import java.util.Arrays;
@@ -82,19 +85,25 @@ public class MainFacade {
     }
 
     // christoffer
-    public PersonDTO CreatePerson() {
-
+    public PersonDTO CreatePerson(String firstName, String lastName, String email, String phone, String street, String zip, String city) throws MissingInputException {
+        if ((firstName.length() == 0 || (lastName.length() == 0))){
+            throw new MissingInputException("Firstname and/or Lastname is missing");
+        }
         EntityManager em = emf.createEntityManager();
+        Person person = new Person(firstName, lastName, email);
 
         try {
             em.getTransaction().begin();
-            Query q = em.createNativeQuery("INSERT INTO PERSON SET FIRSTNAME = 'admin', LASTNAME = 'admin', EMAIL = 'admin@admin.com'");
-
-            int createPerson = q.executeUpdate();
-            System.out.println("-------------------------------------------------");
-            System.out.println("You have inserted: " + createPerson + " person into the database");
-
-
+            Query q = em.createNativeQuery("SELECT a FROM Address a WHERE a.street = :street AND a.zip = :zip AND a.city = :city");
+            q.setParameter("street", street);
+            q.setParameter("city", city);
+            List<Address> addresses = q.getResultList();
+            if (addresses.size() > 0){
+                person.setAddress(addresses.get(0));
+            } else {
+                person.setAddress(new Address(street, city));
+            }
+            em.persist(person);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -128,22 +137,27 @@ public class MainFacade {
     }
 
     // christoffer
-    public PersonDTO editPerson() {
+    public PersonDTO editPerson(PersonDTO p) throws PersonNotFoundException, MissingInputException {
+        if ((p.getFirstName().length() == 0) || (p.getLastName().length() == 0)){
+            throw new MissingInputException("Firstname and/or Lastname is missing");
+        }
+        
         EntityManager em = emf.createEntityManager();
+        
         try {
-            em.getTransaction().begin();
-            Query q = em.createNativeQuery("UPDATE PERSON SET FIRSTNAME = 'admin', LASTNAME = 'admin', EMAIL = 'admin@admin.com' WHERE ID = 1");
-
-            int updatedPerson = q.executeUpdate();
-            System.out.println("-------------------------------------------------");
-            System.out.println("You updated a person with ID number: " + updatedPerson);
-
-
+            Person person = em.find(Person.class, p.getId());
+            if (person == null){
+                throw new PersonNotFoundException(String.format("Person with id: (%d) not found. ", p.getId()));
+            }
+            person.setFirstName(p.getFirstName());
+            person.setLastName(p.getLastName());
+            person.setEmail(p.getEmail());
+                        
             em.getTransaction().commit();
+            return new PersonDTO(person);
         } finally {
             em.close();
         }
-        return new PersonDTO();
     }
 
     // Daniel - done
