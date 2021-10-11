@@ -202,7 +202,7 @@ public class MainFacadeTest {
         PersonDTO getPersonsAfterDelete = mf.getAllPersons();
         assertEquals(2, getPersonsAfterDelete.getAll().size());
         assertThrows(PersonNotFoundException.class, () -> {
-        mf.getPersonByID(id);
+        mf.getById(id);
                 });
         assertEquals(expectedResult, actualResult);
         

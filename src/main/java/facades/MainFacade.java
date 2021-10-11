@@ -189,6 +189,6 @@ public class MainFacade {
         mf.getAllPersonsByZip(1);
         mf.getAmountOfPeopleWithHobby();
         mf.getPersonCount();
-        mf.getPersonByID(1);
+        mf.getById(1);
     }
 }
