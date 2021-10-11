@@ -12,6 +12,7 @@ import javax.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -190,4 +191,22 @@ public class MainFacadeTest {
         }
         assertEquals("admin", p1.getFirstName());
     }
+    
+// Jens Christian - testDeletePersonByID test - Tror den virker, er ikke sikker.
+    @Test
+    public void testDeleteAPersonByID() throws Exception {
+        long id = p1.getId();
+        EntityManagerFactory emf = null;
+        MainFacade mf = MainFacade.getMainFacade(emf);
+        PersonDTO expectedResult = new PersonDTO(p1);
+        boolean actualResult = mf.deleteAPersonById(id);
+        PersonDTO getPersonsAfterDelete = mf.getAllPersons();
+        assertEquals(2, getPersonsAfterDelete.getAll().size());
+        assertThrows(PersonNotFoundException.class, () -> {
+        mf.getPersonByID(id);
+                });
+        assertEquals(expectedResult, actualResult);
+        
+    }
+  
 }

@@ -168,8 +168,11 @@ public class MainFacade {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createQuery("DELETE FROM Person p WHERE p.id = :id").setParameter("id", id).executeUpdate();
-            System.out.println("You deleted a person with the ID: " + id);
+            Query q = em.createQuery("DELETE FROM Person p WHERE p.id = :id").setParameter("id", id);
+
+            int deletedPerson = q.executeUpdate();
+            System.out.println("You deleted a person with ID number: " + deletedPerson);
+
             em.getTransaction().commit();
             return true;
         } finally {
@@ -186,5 +189,6 @@ public class MainFacade {
         mf.getAllPersonsByZip(1);
         mf.getAmountOfPeopleWithHobby();
         mf.getPersonCount();
+        mf.getPersonByID(1);
     }
 }
