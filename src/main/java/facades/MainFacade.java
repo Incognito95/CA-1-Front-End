@@ -56,8 +56,8 @@ public class MainFacade {
             long personCount = (long) em.createQuery("SELECT COUNT(r) FROM Person r ").getSingleResult();
             System.out.println(personCount);
             return personCount;
-        }finally {
-        em.close();
+        } finally {
+            em.close();
         }
     }
 
@@ -167,8 +167,8 @@ public class MainFacade {
             long hobbyCount = (long) em.createQuery("SELECT COUNT(p.firstName) FROM Person p JOIN p.hobbies h WHERE h.persons.firstName = :firstname").getSingleResult();
             System.out.println(hobbyCount);
             return hobbyCount;
-        }finally {
-        em.close();
+        } finally {
+            em.close();
         }
     }
     
