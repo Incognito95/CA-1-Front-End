@@ -45,8 +45,6 @@ public class Person implements Serializable {
         this.phone = new ArrayList();
     }
 
-
-
     public Address getAddress() {
         return address;
     }
@@ -110,6 +108,7 @@ public class Person implements Serializable {
     public Person() {
     }
     
+
     public void addPerson(Person person) {
         if (person != null) {
             person.addPerson(person);
