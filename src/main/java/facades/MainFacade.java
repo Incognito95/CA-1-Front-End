@@ -112,7 +112,7 @@ public class MainFacade {
     }
 
     // Daniel - done
-    public List<Person> getById(long id) {
+    public List<Person> getPersonByID(long id) {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<Person> query = em.createQuery("select p from Person p WHERE p.firstName = :id", Person.class);
@@ -199,6 +199,7 @@ public class MainFacade {
         mf.getAllPersonsByZip(1);
         mf.getAmountOfPeopleWithHobby();
         mf.getPersonCount();
+        mf.getPersonById(1);
     }
 
 
