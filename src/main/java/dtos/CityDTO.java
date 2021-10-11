@@ -19,14 +19,12 @@ public class CityDTO {
     this.ZipCode = ZipCode;
     this.countryName = countryName;
     this.addresses = new ArrayList();
-
   }
 
   public CityDTO(String zipCode, String city) {
     this.ZipCode = ZipCode;
     this.city = city;
   }
-
 
   public Long getId() {
     return id;
@@ -51,7 +49,6 @@ public class CityDTO {
   public void setCity(String city) {
     this.city = city;
   }
-
 
   @Override
   public String toString() {

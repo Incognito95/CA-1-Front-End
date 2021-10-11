@@ -19,7 +19,7 @@ public class Populator {
         EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
         MainFacade mf = MainFacade.getMainFacade(emf);
         
-//        mf.CreatePerson(new PersonDTO()); Hvordan virker den her? Skal vi fikse.
+    //  mf.CreatePerson(new PersonDTO()); Hvordan virker den her? Skal vi fikse.
     }
     
     public static void main(String[] args) {

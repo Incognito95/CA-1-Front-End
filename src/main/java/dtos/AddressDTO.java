@@ -11,11 +11,11 @@ public class AddressDTO {
 
   public AddressDTO(){}
 
-  public AddressDTO(Address entity) {
-    this.id = entity.getId() == null ? null : entity.getId();
-    this.street = entity.getStreet() == null ? null : entity.getStreet();
-    this.additionalInfo = entity.getAdditionalInfo();
-    this.city = entity.getCity() == null ? null : new CityDTO(entity.getCity());
+  public AddressDTO(Long id, String street, String additionalInfo, CityDTO city) {
+    this.id = id;
+    this.street = street;
+    this.additionalInfo = additionalInfo;
+    this.city = city;
   }
 
   public AddressDTO(String street, String additionalInfo) {
@@ -28,7 +28,6 @@ public class AddressDTO {
     this.additionalInfo = additionalInfo;
     this.city = cityInfo;
   }
-
 
   public Long getId() {
     return id;
@@ -53,7 +52,6 @@ public class AddressDTO {
   public void setAdditionalInfo(String additionalInfo) {
     this.additionalInfo = additionalInfo;
   }
-
 
   public CityDTO getCityInfo() {
     return city;

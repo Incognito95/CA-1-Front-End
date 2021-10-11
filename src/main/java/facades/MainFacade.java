@@ -26,12 +26,12 @@ import java.util.List;
 
 
 public class MainFacade {
+
     private static MainFacade instance;
     private static EntityManagerFactory emf;
 
     //Private Constructor to ensure Singleton
-    public MainFacade() {
-    }
+    public MainFacade() {}
 
     /**
      * @param _emf
@@ -49,7 +49,6 @@ public class MainFacade {
         return emf.createEntityManager();
     }
 
-    // ermin - done
     public long getPersonCount(){
         EntityManager em = getEntityManager();
         try {
@@ -61,7 +60,6 @@ public class MainFacade {
         }
     }
 
-    // ermin - done
     public PersonDTO getAllPersons() {
         EntityManager em = getEntityManager();
         try{
@@ -71,7 +69,6 @@ public class MainFacade {
         }
     }
 
-    // Ermin - doing
     public List<Hobby> getHobbyByPerson(long id) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -84,7 +81,6 @@ public class MainFacade {
         }
     }
 
-    // christoffer
     public PersonDTO CreatePerson(String firstName, String lastName, String email, String phone, String street, String zip, String city) throws MissingInputException {
         if ((firstName.length() == 0 || (lastName.length() == 0))){
             throw new MissingInputException("Firstname and/or Lastname is missing");
@@ -111,7 +107,6 @@ public class MainFacade {
         return new PersonDTO();
     }
 
-    // Daniel - done
     public List<Person> getById(long id) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -123,8 +118,6 @@ public class MainFacade {
         }
     }
 
-
-    // ermin - done
     public List<Person> getAllPersonsByZip(int zipcode) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -136,11 +129,11 @@ public class MainFacade {
         }
     }
 
-    // christoffer
+    // not fully working yet
     public PersonDTO editPerson(PersonDTO p) throws PersonNotFoundException, MissingInputException {
         if ((p.getFirstName().length() == 0) || (p.getLastName().length() == 0)){
             throw new MissingInputException("Firstname and/or Lastname is missing");
-        }
+    }
         
         EntityManager em = emf.createEntityManager();
         
@@ -160,7 +153,6 @@ public class MainFacade {
         }
     }
 
-    // Daniel - done
     public long getAmountOfPeopleWithHobby() {       
         EntityManager em = getEntityManager();
         try {
@@ -171,8 +163,7 @@ public class MainFacade {
             em.close();
         }
     }
-    
-    // delete person method - jens - done
+
     public boolean deleteAPersonById(long id) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -186,20 +177,14 @@ public class MainFacade {
         }
     }
 
-    
-    
-
-
     public static void main(String[] args) throws Exception {
         emf = EMF_Creator.createEntityManagerFactory();
         MainFacade mf = getMainFacade(emf);
         mf.CreatePerson("firstName", "lastName", "email", "phone", "street", "zip", "city");
         mf.getHobbyByPerson(1);
-       // mf.editPerson();
+//        mf.editPerson();
         mf.getAllPersonsByZip(1);
         mf.getAmountOfPeopleWithHobby();
         mf.getPersonCount();
     }
-
-
 }

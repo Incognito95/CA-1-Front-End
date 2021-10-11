@@ -80,7 +80,4 @@ public class PersonDTO {
             all.add(new PersonDTO(p));
         });
     }
-
-
-
 }

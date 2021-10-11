@@ -19,13 +19,11 @@ import static junit.runner.Version.id;
 
 @Path("Persons")
 public class RenameMeResource {
-    
-    
+
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     private static final MainFacade FACADE = MainFacade.getMainFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    
-    
+
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String demo() {
@@ -46,8 +44,7 @@ public class RenameMeResource {
         long count = FACADE.getPersonCount();
         return "{\"count\":" + count +"}";
     }
-    
-    
+
     @Path("all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -55,8 +52,7 @@ public class RenameMeResource {
         PersonDTO persons = FACADE.getAllPersons();
         return GSON.toJson(persons);
     }
-    
-    
+
     @Path("id")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -72,7 +68,6 @@ public class RenameMeResource {
         long hobbyCount = FACADE.getAmountOfPeopleWithHobby();
         return "{\"count\":" + hobbyCount +"}";
     }
-    
 
     @Path("hobby")
     @GET
@@ -89,5 +84,4 @@ public class RenameMeResource {
         PersonDTO persons = (PersonDTO) FACADE.getAllPersonsByZip(1);
         return GSON.toJson(persons);
     }
-    
 }

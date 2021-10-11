@@ -9,6 +9,7 @@ package errorhandling;
  *
  * @author Christoffer
  */
+// used in editPerson to see if it can find the person inside the database
 public class PersonNotFoundException extends Exception{
     public PersonNotFoundException(String message){
         super(message);

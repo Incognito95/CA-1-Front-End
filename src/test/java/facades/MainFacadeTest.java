@@ -118,7 +118,6 @@ public class MainFacadeTest {
         assertEquals(99, p1.getFirstName());
     }
 
-    
     @Test
     void testCreatePerson() {
         p1.setFirstName("admin");
@@ -148,8 +147,7 @@ public class MainFacadeTest {
         }
        assertEquals(1, p1.getId());
     }
-    
-    
+
     @Test
     void testGetAllPersonsByCiytOrZip() {
         p1.setId(Long.MIN_VALUE);
@@ -164,8 +162,7 @@ public class MainFacadeTest {
         }
         assertEquals(2, p1.getHobbies().size());
     }
-    
-    
+
     @Test
     void testEditPerson() throws PersonNotFoundException, MissingInputException {
         p1.setFirstName("Ermin");
@@ -178,8 +175,7 @@ public class MainFacadeTest {
         }
         assertEquals("Ermin", p1.getFirstName());
     }
-    
-    
+
     @Test
     void testGetAmountOfPeopleWithHobby() {
         p1.getFirstName();
@@ -193,10 +189,5 @@ public class MainFacadeTest {
             em.close();
         }
         assertEquals("admin", p1.getFirstName());
-        
     }
-    
-// Jens Christian - DeletePersonByID test - JC LAVER DEN.
-    
-  
 }

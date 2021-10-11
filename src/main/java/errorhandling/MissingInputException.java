@@ -9,6 +9,8 @@ package errorhandling;
  *
  * @author Christoffer
  */
+
+// used in editPerson and createPerson to check for missing input
 public class MissingInputException extends Exception {
     public MissingInputException (String message){
         super(message);

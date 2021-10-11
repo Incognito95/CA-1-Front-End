@@ -50,5 +50,4 @@ public class Utility {
         String backAgain = DTO2json(rmDTO);
         System.out.println(backAgain);
     }
-
 }
