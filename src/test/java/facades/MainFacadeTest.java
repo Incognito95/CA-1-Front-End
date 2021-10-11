@@ -5,6 +5,8 @@ import entities.Hobby;
 import utils.EMF_Creator;
 import entities.Person;
 import entities.Phone;
+import errorhandling.MissingInputException;
+import errorhandling.PersonNotFoundException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterAll;
@@ -12,6 +14,7 @@ import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 //Uncomment the line below, to temporarily disable this test
@@ -164,12 +167,12 @@ public class MainFacadeTest {
     
     
     @Test
-    void testEditPerson() {
+    void testEditPerson() throws PersonNotFoundException, MissingInputException {
         p1.setFirstName("Ermin");
         PersonDTO p = new PersonDTO(p1);
         EntityManager em = emf.createEntityManager();
         try {
-            p = facade.editPerson();
+            p = facade.editPerson(p);
         } finally {
             em.close();
         }
@@ -192,6 +195,8 @@ public class MainFacadeTest {
         assertEquals("admin", p1.getFirstName());
         
     }
+    
+// Jens Christian - DeletePersonByID test - JC LAVER DEN.
     
   
 }

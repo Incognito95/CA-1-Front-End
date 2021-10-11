@@ -31,14 +31,13 @@ public class RenameMeResource {
     public String demo() {
         return "{\"msg\":\"Hello World\"}";
     }
-
-    //How to use @pathParam in order to have multiple paths
-//    @Path("adress")
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public String getFirtName(@PathParam("firstName") String firstName) {
-//        return GSON.toJson(p1);
-//        }
+    
+    @Path("{server}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String serverIsUp(@PathParam("server")String server){
+        return "(\"msg\":\"Your server is up and running\")";
+    }
     
     @Path("count")
     @GET
