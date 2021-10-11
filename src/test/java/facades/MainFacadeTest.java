@@ -192,7 +192,6 @@ public class MainFacadeTest {
         assertEquals("admin", p1.getFirstName());
     }
     
-// Jens Christian - testDeletePersonByID test - Tror den virker, er ikke sikker.
     @Test
     public void testDeleteAPersonByID() throws Exception {
         long id = p1.getId();

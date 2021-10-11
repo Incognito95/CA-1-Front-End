@@ -239,7 +239,6 @@ public class IntegrationsTest {
         }
     }
     
-    // Jens Christian - DeletePersonByID test
     @Test
     public PersonDTO DeletePersonByID(long id) {
         EntityManager em = emf.createEntityManager();
