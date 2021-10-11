@@ -164,7 +164,7 @@ public class MainFacade {
     public long getAmountOfPeopleWithHobby() {       
         EntityManager em = getEntityManager();
         try {
-            long hobbyCount = (long) em.createQuery("SELECT COUNT(p.firstName) FROM Person p JOIN p.hobbies h WHERE h.persons.firstName = :firstname").getSingleResult();
+            long hobbyCount = (long) em.createQuery("SELECT COUNT(p.firstName) FROM Person p JOIN p.hobbies h WHERE p.firstName = :firstname").getSingleResult();
             System.out.println(hobbyCount);
             return hobbyCount;
         }finally {
@@ -177,7 +177,7 @@ public class MainFacade {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createQuery("DELETE FROM Person p WHERE p.person.id = :id").setParameter("id", id).executeUpdate();
+            em.createQuery("DELETE FROM Person p WHERE p.id = :id").setParameter("id", id).executeUpdate();
             System.out.println("You deleted a person with the ID: " + id);
             em.getTransaction().commit();
             return true;
@@ -193,9 +193,9 @@ public class MainFacade {
     public static void main(String[] args) throws Exception {
         emf = EMF_Creator.createEntityManagerFactory();
         MainFacade mf = getMainFacade(emf);
-        mf.CreatePerson();
+        mf.CreatePerson("ermin","jgeg","gheige@","523532","gnfewivne","2345","brøndby");
         mf.getHobbyByPerson(1);
-        mf.editPerson();
+       // mf.editPerson();
         mf.getAllPersonsByZip(1);
         mf.getAmountOfPeopleWithHobby();
         mf.getPersonCount();
