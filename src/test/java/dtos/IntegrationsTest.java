@@ -161,7 +161,7 @@ public class IntegrationsTest {
 
     // Daniel - done
     @Test
-    public List<Person> getById(long id) {
+    public List<Person> getPersonById(long id) {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<Person> query = em.createQuery("select p from Person p WHERE p.firstName = :id", Person.class);
@@ -247,7 +247,23 @@ public class IntegrationsTest {
         }
     }
     
-    // Jens Christian - DeletePersonByID test - JC LAVER DEN.
-    
+    // Jens Christian - DeletePersonByID test
+    @Test
+    public PersonDTO DeletePersonByID(long id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Query q = em.createQuery("DELETE FROM Person p WHERE p.id = :id").setParameter("id", id);
+
+            int deletedPerson = q.executeUpdate();
+            System.out.println("You deleted a person with ID number: " + deletedPerson);
+
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new PersonDTO();
+        
+    }
 
 }
