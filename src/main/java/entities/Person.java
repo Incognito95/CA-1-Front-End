@@ -19,16 +19,25 @@ public class Person implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
-    
+
+    // Primary keys
+    // one to many associates relationship between tables
+    // mapped by distinguishes the owner of the table ie. primary key
+    // cascading is used to link two entities or more together (parent child relationship)
     @OneToMany(mappedBy = "person", cascade = CascadeType.PERSIST)
     private List<Phone> phone;
-    
-    
+
+    // ManyToMany either side may be the owning side
     @ManyToMany(mappedBy = "persons", cascade = CascadeType.PERSIST)
     private List<Hobby> hobbies;
-    
+
+    // ManyToOne associates relationship between tables
+    // mappedby cannot be add to ManyToOne
     @ManyToOne
     private Address address;
+
+    // constructors
+    public Person() {}
 
     public Person(String firstName, String lastName, String email) {
         this.firstName = firstName;
@@ -45,8 +54,7 @@ public class Person implements Serializable {
         this.phone = new ArrayList();
     }
 
-
-
+    // getters and setters
     public Address getAddress() {
         return address;
     }
@@ -55,8 +63,6 @@ public class Person implements Serializable {
         this.address = address;
     }
 
-
-
     public List<Phone> getPhone() {
         return phone;
     }
@@ -64,8 +70,6 @@ public class Person implements Serializable {
     public void setPhone(List<Phone> phone) {
         this.phone = phone;
     }
-
-
 
     public Long getId() {
         return id;
@@ -107,16 +111,7 @@ public class Person implements Serializable {
         this.hobbies = hobbies;
     }
 
-    public Person() {
-    }
-    
-//    public void addPerson(Person person) {
-//        if (person != null) { // if hobby doesn't exist insert person into person table
-//            this.hobbies.add(person); // add hobby to table
-//            person.get().add(this); // add hobby into person table
-//        }
-//    }
-
+    // methods are being used in MainFacadeTest and later in our MainFacade
     public void addHobby(Hobby hobby) {
         if (hobby != null) { // if hobby doesn't exist insert hobby into person table
             this.hobbies.add(hobby); // add hobby to table
@@ -144,5 +139,4 @@ public class Person implements Serializable {
             hobby.getPersons().remove(this);
         }
     }
-    
 }

@@ -31,20 +31,21 @@ public class Phone implements Serializable {
     private Long id;
     private int number;
     private String description;
-    
+
+    // Primary keys
+    // ManyToOne associates relationship between tables
     @ManyToOne
     private Person person;
+
+    // constructors
+    public Phone() {}
 
     public Phone(int number, String description) {
         this.number = number;
         this.description = description;
     }
 
-    public Phone() {
-    }
-    
-    
-
+    // getters and setters
     public Person getPerson() {
         return person;
     }
@@ -52,8 +53,6 @@ public class Phone implements Serializable {
     public void setPerson(Person person) {
         this.person = person;
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -78,8 +77,4 @@ public class Phone implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    
-    
-
 }

@@ -21,6 +21,7 @@ import javax.persistence.ManyToMany;
  * @author danielpedersen
  */
 @Entity
+// used to convert the state of an object into a byte stream in order to handle the data in our database
 public class Hobby implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,15 +30,17 @@ public class Hobby implements Serializable {
     private Long id;
     private String name;
     private String description;
-    
-    
+
+    // Primary keys
+    // mapped by distinguishes the owner of the table ie. primary key
+    // cascading is used to link two entities or more together (parent child relationship)
+    // ManyToMany either side may be the owning side
     @ManyToMany
     private List<Person> persons;
     
-
+    // constructors
     public Hobby() {
     }
-    
 
     public Hobby(String name, String description) {
         this.name = name;
@@ -45,6 +48,7 @@ public class Hobby implements Serializable {
         this.persons = new ArrayList();
     }
 
+    // getters and setters
     public Long getId() {
         return id;
     }
@@ -77,12 +81,11 @@ public class Hobby implements Serializable {
         this.persons = persons;
     }
 
-    
+    // addPerson method - checking if person contains any person if not then adds it to the list
     public void addPerson(Person person) {
         if (person != null) { // if person doesn't exist insert person into person table
             this.persons.add(person); // add person to table
             person.getHobbies().add(this); // add person into hobby table
         }
     }
-    
 }
