@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
  * @author danielpedersen
  */
 @Entity
+// used to convert the state of an object into a byte stream in order to handle the data in our database
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,17 +29,19 @@ public class Address implements Serializable {
     private Long id;
     private String street;
     private String AdditionalInfo;
-    
+
+    // Primary keys
+    // one to many associates relationship between tables
+    // mapped by distinguishes the owner of the table ie. primary key
+    // cascading is used to link two entities or more together (parent child relationship)
     @OneToMany(mappedBy = "address", cascade = CascadeType.PERSIST)
     private List<Person> persons;
     
     @ManyToOne
     private City city;
 
-    public Address() {
-    }
-    
-    
+    // constructors
+    public Address() {}
 
     public Address(String street, String AdditionalInfo) {
         this.street = street;
@@ -50,6 +53,7 @@ public class Address implements Serializable {
         this.city = city;
     }
 
+    // getters and setters
     public City getCity() {
         return city;
     }
@@ -57,10 +61,6 @@ public class Address implements Serializable {
     public void setCity(City city) {
         this.city = city;
     }
-    
-    
-    
-    
 
     public List<Person> getPersons() {
         return persons;
@@ -69,8 +69,6 @@ public class Address implements Serializable {
     public void setPersons(List<Person> persons) {
         this.persons = persons;
     }
-    
-    
 
     public String getStreet() {
         return street;
@@ -87,8 +85,6 @@ public class Address implements Serializable {
     public void setAdditionalInfo(String AdditionalInfo) {
         this.AdditionalInfo = AdditionalInfo;
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -97,8 +93,4 @@ public class Address implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    
-
-    
 }

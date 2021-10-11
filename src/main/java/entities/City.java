@@ -28,11 +28,16 @@ public class City implements Serializable {
     private Long id;
     private int ZipCode;
     private String countryName;
-    
+
+    // Primary keys
+    // one to many associates relationship between tables
+    // mapped by distinguishes the owner of the table ie. primary key
+    // cascading is used to link two entities or more together (parent child relationship)
     @OneToMany(mappedBy = "city", cascade = CascadeType.PERSIST)
     private List<Address> addresses;
-    
-    
+
+    // constructors
+    public City() {}
 
     public City(Long id, int ZipCode, String countryName) {
         this.id = id;
@@ -41,11 +46,7 @@ public class City implements Serializable {
         this.addresses = new ArrayList();
     }
 
-    public City() {
-    }
-    
-    
-
+    // getters and setters
     public List<Address> getAddresses() {
         return addresses;
     }
@@ -53,10 +54,6 @@ public class City implements Serializable {
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
     }
-    
-    
-    
-    
 
     public int getZipCode() {
         return ZipCode;
@@ -73,8 +70,6 @@ public class City implements Serializable {
     public void setCountryName(String countryName) {
         this.countryName = countryName;
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -84,15 +79,13 @@ public class City implements Serializable {
         this.id = id;
     }
 
-
+    // AddAdress method - checking if address contains any address if not then adds it to the list
     public void AddAddress(Address address) {
         if (address != null) { // if address doesn't exist insert address into person table
             address.setCity(this); // add city to address table
             this.addresses.add(address); // add address to table
         }
     }
-    
-    
 }
 
 
