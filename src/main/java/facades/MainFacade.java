@@ -193,7 +193,7 @@ public class MainFacade {
     public static void main(String[] args) throws Exception {
         emf = EMF_Creator.createEntityManagerFactory();
         MainFacade mf = getMainFacade(emf);
-        mf.CreatePerson();
+        mf.CreatePerson("firstName", "lastName", "email", "phone", "street", "zip", "city");
         mf.getHobbyByPerson(1);
         mf.editPerson();
         mf.getAllPersonsByZip(1);

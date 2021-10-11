@@ -110,14 +110,12 @@ public class Person implements Serializable {
     public Person() {
     }
     
-<<<<<<< HEAD
     public void addPerson(Person person) {
         if (person != null) {
             person.addPerson(person);
             }
     }
-=======
->>>>>>> 43bcd89eaebd6a94dcb7844e20f112fb69047d53
+
 
     public void addHobby(Hobby hobby) {
         if (hobby != null) { // if hobby doesn't exist insert hobby into person table
